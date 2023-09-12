@@ -1,0 +1,33 @@
+Given a string S, remove consecutive duplicates from it recursively.
+Input Format :
+String S
+Output Format :
+Output string
+Constraints :
+1 <= |S| <= 10^3
+where |S| represents the length of string
+Sample Input 1 :
+aabccba
+Sample Output 1 :
+abcba
+Sample Input 2 :
+xxxyyyzwwzzz
+Sample Output 2 :
+xyzwz
+solutio for this code is here:
+def removeConsecutiveDuplicates(string):
+    # Base case: If the string is empty or has only one character, return it as is
+    if len(string) <= 1:
+        return string
+
+    # Recursive case: Check if the first two characters are consecutive duplicates
+    if string[0] == string[1]:
+        # If they are duplicates, remove the first character and recursively call the function on the modified string
+        return removeConsecutiveDuplicates(string[1:])
+    else:
+        # If they are not duplicates, keep the first character and recursively call the function on the rest of the string
+        return string[0] + removeConsecutiveDuplicates(string[1:])
+
+# Main
+string = input().strip()
+print(removeConsecutiveDuplicates(string))
