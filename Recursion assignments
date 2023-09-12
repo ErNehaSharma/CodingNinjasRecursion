@@ -1,4 +1,4 @@
-*****Geometric Sum*****
+1 *****Geometric Sum*****
 
 Given k, find the geometric sum i.e.
 1 + 1/2 + 1/4 + 1/8 + ... + 1/(2^k) 
@@ -44,3 +44,378 @@ result = geometricSum(k)
 
 # Print the result with up to 5 decimal places
 print("{:.5f}".format(result))
+-------------------------------------------------------------------------
+2*****Check Palindrome (recursive)*****
+Check whether a given String 'S' is a palindrome using recursion.
+
+
+Return true or false.
+
+
+Note:
+You don’t need to print anything. Just implement the given function.
+Example:
+Input: s = "racecar"
+Output: true
+Explanation: "racecar" is a palindrome.
+Input Format:
+The first and only line of the input contains string S.
+Output format:
+Return a boolean value True or False.
+Sample Input 1:
+abbba
+Sample Output 1:
+true
+Explanation Of Sample Input 1 :
+“abbba” is a palindrome
+Sample Input 2:
+abcd
+Sample Output 2:
+false
+Explanation Of Sample Input 2 :
+“abcd” is not a palindrome.
+Constraints:
+0 <= |S| <= 10^6
+where |S| represents the length of string S.
+solution for this code is here::
+def isPalindrome(s):
+    if len(s) <= 1:
+        return True
+    if s[0] != s[-1]:
+        return False
+    return isPalindrome(s[1:-1])
+
+if __name__ == "__main__":
+    # Input
+    s = input()
+
+    # Check if it's a palindrome
+    if isPalindrome(s):
+        print("true")
+    else:
+        print("false")
+
+-------------------------------------------------------------------------
+3*****Sum of digits (recursive)*****
+Write a recursive function that returns the sum of the digits of a given integer.
+Input format :
+Integer N
+Output format :
+Sum of digits of N
+Constraints :
+0 <= N <= 10^9
+Sample Input 1 :
+12345
+Sample Output 1 :
+15
+Sample Input 2 :
+9
+Sample Output 2 :
+9
+
+solution for this code is here::
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+def sumOfDigits(N):
+    # Base case: If N is less than 10, return N (single digit number)
+    if N < 10:
+        return N
+    
+    # Get the last digit of N using modulo operation
+    last_digit = N % 10
+    
+    # Recursively calculate the sum of digits for the remaining part of N
+    remaining_sum = sumOfDigits(N // 10)
+    
+    # Return the sum of the last digit and the sum of digits of the remaining part
+    return last_digit + remaining_sum
+
+# Main
+N = int(input())
+result = sumOfDigits(N)
+
+# Print the result
+print(result)
+----------------------------------------------------------------------------------------------
+4*****Multiplication (Recursive)*****
+Given two integers M & N, calculate and return their multiplication using recursion. You can only use subtraction and addition for your calculation. No other operators are allowed.
+Input format :
+Line 1 : Integer M
+Line 2 : Integer N
+Output format :
+M x N
+Constraints :
+0 <= M <= 1000
+0 <= N <= 1000
+Sample Input 1 :
+3 
+5
+Sample Output 1 :
+15
+Sample Input 2 :
+4 
+0
+Sample Output 2 :
+0
+Solution for this code is here::
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+def multiply(M, N):
+    # Initialize the result to 0
+    result = 0
+
+    # Handle negative numbers
+    if M < 0 and N < 0:
+        M, N = -M, -N
+    elif M < 0:
+        M, N = N, M
+    elif N < 0:
+        M, N = N, M
+
+    # Perform addition 'M' times to calculate the multiplication
+    for _ in range(abs(N)):
+        result += M
+
+    return result
+
+# Main
+M = int(input())
+N = int(input())
+result = multiply(M, N)
+
+# Print the result
+print(result)
+
+---------------------------------------------------------------------------------------
+5th*****Count Zeros*****
+Given an integer N, count and return the number of zeros that are present in the given integer using recursion.
+Input Format :
+Integer N
+Output Format :
+Number of zeros in N
+Constraints :
+0 <= N <= 10^9
+Sample Input 1 :
+0
+Sample Output 1 :
+1
+Sample Input 2 :
+00010204
+Sample Output 2 :
+2
+Explanation for Sample Output 2 :
+Even though "00010204" has 5 zeros, the output would still be 2 because when you convert it to an integer, it becomes 10204.
+Sample Input 3 :
+708000
+Sample Output 3 :
+4
+solution is here::
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+## Read input as specified in the question.
+## Print output as specified in the question.
+def countZeros(N):
+    # Base case: If N is 0, return 1 (there is one zero)
+    if N == 0:
+        return 1
+    
+    # Base case: If N is less than 10, return 0 (no zero)
+    if N < 10:
+        return 0
+    
+    # Get the last digit of N
+    last_digit = N % 10
+    
+    # Recursively count zeros in the rest of the number
+    rest_zeros = countZeros(N // 10)
+    
+    # If the last digit is zero, increment the count
+    if last_digit == 0:
+        return rest_zeros + 1
+    else:
+        return rest_zeros
+
+# Main
+N = int(input())
+result = countZeros(N)
+
+# Print the result
+print(result)
+-------------------------------------------------------------------------------
+6th*****String to Integer*****
+Write a recursive function to convert a given string into the number it represents. That is input will be a numeric string that contains only numbers, you need to convert the string into corresponding integer and return the answer.
+Input format :
+Numeric string S (string, Eg. "1234")
+Output format :
+Corresponding integer N (int, Eg. 1234)
+Constraints :
+0 < |S| <= 9
+where |S| represents length of string S.
+Sample Input 1 :
+00001231
+Sample Output 1 :
+1231
+Sample Input 2 :
+12567
+Sample Output 2 :
+12567
+solution is here::
+def stringToInteger(s):
+    # Base case: If the string is empty, return 0
+    if not s:
+        return 0
+    
+    # Convert the first character to an integer and multiply it by 10^(length-1)
+    first_digit = int(s[0])
+    length = len(s)
+    converted_number = first_digit * 10**(length - 1)
+    
+    # Recursively convert the rest of the string and add it to the current result
+    rest = stringToInteger(s[1:])
+    
+    return converted_number + rest
+
+# Main
+s = input()
+result = stringToInteger(s)
+
+# Print the result
+print(result)
+--------------------------------------------------------------------------------------------------
+7th*****Pair Star*****
+Given a string S, compute recursively a new string where identical chars that are adjacent in the original string are separated from each other by a "*".
+Input format :
+String S
+Output format :
+Modified string
+Constraints :
+0 <= |S| <= 1000
+where |S| represents length of string S.
+Sample Input 1 :
+hello
+Sample Output 1:
+hel*lo
+Sample Input 2 :
+aaaa
+Sample Output 2 :
+a*a*a*a
+solution is here:
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+## Read input as specified in the question.
+## Print output as specified in the question.
+def insertAsterisk(s):
+    # Base case: If the string has 0 or 1 characters, return it as is
+    if len(s) <= 1:
+        return s
+    
+    # If the first character is the same as the second character,
+    # insert a "*" between them, and recursively process the rest of the string.
+    if s[0] == s[1]:
+        return s[0] + '*' + insertAsterisk(s[1:])
+    
+    # If the first character is different from the second character,
+    # keep the first character and recursively process the rest of the string.
+    return s[0] + insertAsterisk(s[1:])
+
+# Main
+s = input()
+result = insertAsterisk(s)
+
+# Print the modified string
+print(result)
+-------------------------------------------------------------------------------------
+8th*****Check AB*****
+Suppose you have a string, S, made up of only 'a's and 'b's. Write a recursive function that checks if the string was generated using the following rules:
+a. The string begins with an 'a'
+b. Each 'a' is followed by nothing or an 'a' or "bb"
+c. Each "bb" is followed by nothing or an 'a'
+If all the rules are followed by the given string, return true otherwise return false.
+Input format :
+String S
+Output format :
+'true' or 'false'
+Constraints :
+1 <= |S| <= 1000
+where |S| represents length of string S.
+Sample Input 1 :
+abb
+Sample Output 1 :
+true
+Sample Input 2 :
+abababa
+Sample Output 2 :
+false
+Explanation for Sample Input 2
+In the above example, a is not followed by either "a" or "bb", instead it's followed by "b" which results in false to be returned.
+solution for this code is here::
+def isPalindrome(s):
+    if len(s) <= 1:
+        return True
+    if s[0] != s[-1]:
+        return False
+    return isPalindrome(s[1:-1])
+
+if __name__ == "__main__":
+    # Input
+    s = input()
+
+    # Check if it's a palindrome
+    if isPalindrome(s):
+        print("true")
+    else:
+        print("false")
+---------------------------------------------------------------------------------------------------------------------------------------------------
+9th*****Staircase*****
+A child is running up a staircase with N steps, and can hop either 1 step, 2 steps or 3 steps at a time. Implement a method to count how many possible ways the child can run up to the stairs. You need to return number of possible ways W.
+Input format :
+Integer N
+Output Format :
+Integer W
+Constraints :
+1 <= N <= 30
+Sample Input 1 :
+4
+Sample Output 1 :
+7
+Sample Input 2 :
+5
+Sample Output 2 :
+13
+solution for this problem is here::
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+## Read input as specified in the question.
+## Print output as specified in the question.
+def countWays(N):
+    # Base case: If N is 0 or 1, there is only one way (no steps or 1 step)
+    if N == 0 or N == 1:
+        return 1
+    # Base case: If N is 2, there are two ways (1 step + 1 step or 2 steps)
+    elif N == 2:
+        return 2
+    # If N is greater than 2, calculate the number of ways recursively
+    else:
+        return countWays(N - 1) + countWays(N - 2) + countWays(N - 3)
+
+# Main
+N = int(input())
+result = countWays(N)
+
+# Print the result
+print(result)
