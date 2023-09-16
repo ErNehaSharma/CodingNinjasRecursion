@@ -28,13 +28,17 @@ b c
 a c
 -------------------------------------------------------------------------------------------------------
 solution for this code is here:
+
 def towerofhanoi(n, source, aux, dest):
+    if n == 0:
+        return
     if n == 1:
         print(source, dest)
         return
-    towerofhanoi(n - 1, source, dest, aux)
+    towerofhanoi(n-1, source, dest, aux)
     print(source, dest)
-    towerofhanoi(n - 1, aux, source, dest)
+    towerofhanoi(n-1, aux, source, dest)
+    # Please add your code here
 
-n = int(input())
+n=int(input())
 towerofhanoi(n, 'a', 'b', 'c')
